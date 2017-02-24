@@ -1,0 +1,17 @@
+{
+  "name": "tetris",
+  "authors": [
+    "zingi <aaron.zingerle@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

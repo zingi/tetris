@@ -1,0 +1,17 @@
+*
+{
+    padding: 0;
+    margin: 0;
+}
+
+body
+{
+    background: rgb(34, 28, 53);
+}
+
+#container
+{
+    background: black;
+    margin: auto;
+    margin-top: 50px;
+}

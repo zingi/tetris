@@ -26,6 +26,24 @@ function Field(xOrigin, yOrigin, xCount, yCount, gridSize)
         }
     }
 
+    this.setUsed = function(block)
+    {
+        var elements    = block.variations[block.actualVariation].elements;
+        var elColor     = block.color;
+
+        for (var i = 0; i < elements.length; i++)
+        {
+            var element = elements[i];
+            var box     = this.getBox(block.rx + element.distX, block.ry + element.distY);
+
+            box.isUsed  = true;
+            box.color.a = elColor.a;
+            box.color.r = elColor.r;
+            box.color.g = elColor.g;
+            box.color.b = elColor.b;
+        }
+    }
+
     this.getBox = function(col, row)
     {
         return this.array[col][row];

@@ -10,6 +10,7 @@ var G_SIZE      = 25;
 var field       = new Field(X_ORIGIN, Y_ORIGIN, X_COUNT, Y_COUNT, G_SIZE);
 var blocks      = new Blocks();
 var actualBlock = null;
+var clearBlock  = false;
 
 var timeStart;
 var timeEnd;
@@ -55,6 +56,10 @@ function draw()
 
 function checkActualBlock()
 {
+    if (clearBlock)
+    {
+        // set Field as used
+    }
     if (actualBlock === null)
     {
         // generiere neuen Block
@@ -121,7 +126,8 @@ function keyPressed()
     }
     else if (keyCode == UP_ARROW)
     {
-        actualBlock = null;
+        field.setUsed(actualBlock); // for testing:
+        actualBlock = null;         // generate new block, fix actual block
     }
     return false;
 }

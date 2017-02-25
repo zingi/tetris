@@ -4,7 +4,7 @@ function Blocks(gridSize)
     this.tetris     = [];
 
     // rot
-    var blockS = new Block(5,5);
+    var blockS = new Block(5,0);
     blockS.color.set(230, 0, 0, 1);
     blockS.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
@@ -13,24 +13,24 @@ function Blocks(gridSize)
 
     blockS.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
-                            new BlockElement(1,1),
-                            new BlockElement(0,-1)]);
+                            new BlockElement(1,-1),
+                            new BlockElement(0,1)]);
 
 
     // grün
-    var blockSU = new Block(5,5);
+    var blockSU = new Block(5,0);
     blockSU.color.set(0, 230, 0, 1);
     blockSU.addVariation([  new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(0,-1),
-                            new BlockElement(1,1)]);
+                            new BlockElement(1,-1)]);
 
     blockSU.addVariation([  new BlockElement(0,0),
-                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
                             new BlockElement(-1,0),
                             new BlockElement(-1,-1)]);
 
-    var blockI = new Block(5,5);
+    var blockI = new Block(4,0);
     blockI.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -42,7 +42,7 @@ function Blocks(gridSize)
                             new BlockElement(0,2)]);
 
     // violett
-    var blockT = new Block(5,5);
+    var blockT = new Block(5,0);
     blockT.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -64,7 +64,7 @@ function Blocks(gridSize)
                             new BlockElement(-1,0)]);
 
     // orange
-    var blockL = new Block(5,5);
+    var blockL = new Block(5,0);
     blockL.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -86,7 +86,7 @@ function Blocks(gridSize)
                             new BlockElement(-1,-1)]);
 
     // dunkel-blau
-    var blockLU = new Block(5,5);
+    var blockLU = new Block(5,0);
     blockLU.addVariation([  new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -95,7 +95,7 @@ function Blocks(gridSize)
     blockLU.addVariation([  new BlockElement(0,0),
                             new BlockElement(0,-1),
                             new BlockElement(0,1),
-                            new BlockElement(-1,1)]);
+                            new BlockElement(1,-1)]);
 
     blockLU.addVariation([  new BlockElement(0,0),
                             new BlockElement(-1,0),
@@ -105,10 +105,10 @@ function Blocks(gridSize)
     blockLU.addVariation([  new BlockElement(0,0),
                             new BlockElement(0,-1),
                             new BlockElement(0,1),
-                            new BlockElement(1,-1)]);
+                            new BlockElement(-1,1)]);
 
     // gelb
-    var blockQ = new Block(5,5);
+    var blockQ = new Block(4,0);
     blockQ.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
                             new BlockElement(0,1),
@@ -121,6 +121,13 @@ function Blocks(gridSize)
     this.tetris.push(blockL);
     this.tetris.push(blockLU);
     this.tetris.push(blockQ);
+
+    this.getRandBlock = function()
+    {
+        var index = getRandomInt(0, this.tetris.length-1);
+        var block = $.extend(true, {}, this.tetris[index]);
+        return block;
+    }
 }
 
 function Block(seedX, seedY)
@@ -134,9 +141,9 @@ function Block(seedX, seedY)
     this.color  = new function()
     {
         this.a  = 1; // alpha 0-1
-        this.r  = 50; // red   0-255
-        this.g  = 50; // green 0-255
-        this.b  = 50; // blue  0-255
+        this.r  = 240; // red   0-255
+        this.g  = 240; // green 0-255
+        this.b  = 240; // blue  0-255
 
         this.set = function(r,g,b,a)
         {
@@ -315,4 +322,9 @@ function BlockElement(distX, distY)
 {
     this.distX = distX;
     this.distY = distY;
+}
+
+function getRandomInt(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

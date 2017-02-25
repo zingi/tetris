@@ -9,6 +9,12 @@ var G_SIZE      = 25;
 
 var field       = new Field(X_ORIGIN, Y_ORIGIN, X_COUNT, Y_COUNT, G_SIZE);
 var blocks      = new Blocks();
+var actualBlock = null;
+
+var timeStart;
+var timeEnd;
+var timeDiff    = 0;
+var speedMillis = 300;
 
 function setup()
 {
@@ -24,7 +30,7 @@ function setup()
     field.getBox(3,10).color.b = 0;
     field.getBox(3,10).isUsed  = true;
 
-    console.log(field);
+    timeStart = timestamp();
 }
 
 function draw()
@@ -33,40 +39,69 @@ function draw()
 
     field.draw();
 
+    timeEnd     = timestamp();
+    timeDiff    = timeEnd - timeStart;
+    if (timeDiff > (speedMillis))
+    {
+        timeStart = timeEnd;
+        checkActualBlock();
+    }
+
+
     //TODO: automate the block-seed
-    blocks.tetris[0].draw();
+    if (actualBlock != null) {
+        actualBlock.draw();
+    }
+}
+
+function checkActualBlock()
+{
+    if (actualBlock === null)
+    {
+        // generiere neuen Block
+        actualBlock = blocks.getRandBlock();
+    }
 }
 
 function keyPressed()
 {
     if (keyCode == 32) // space pressed
     {
-        if (blocks.tetris[0].checkRotationMove())
+        if (actualBlock.checkRotationMove())
         {
-            blocks.tetris[0].changeVariation();
+            actualBlock.changeVariation();
         }
 
     }
     else if (keyCode == LEFT_ARROW)
     {
-        if (blocks.tetris[0].checkLeftMove())
+        if (actualBlock.checkLeftMove())
         {
-            blocks.tetris[0].rx--;
+            actualBlock.rx--;
         }
     }
     else if (keyCode == RIGHT_ARROW)
     {
-        if (blocks.tetris[0].checkRightMove())
+        if (actualBlock.checkRightMove())
         {
-            blocks.tetris[0].rx++;
+            actualBlock.rx++;
         }
     }
     else if (keyCode == DOWN_ARROW)
     {
-        if (blocks.tetris[0].checkDownMove())
+        if (actualBlock.checkDownMove())
         {
-            blocks.tetris[0].ry++;
+            actualBlock.ry++;
         }
     }
+    else if (keyCode == UP_ARROW)
+    {
+        actualBlock = null;
+    }
     return false;
+}
+
+function timestamp()
+{
+    return Date.now();
 }

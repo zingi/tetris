@@ -3,11 +3,9 @@ function Blocks(gridSize)
     this.gridSize   = gridSize;
     this.tetris     = [];
 
+    // rot
     var blockS = new Block(5,5);
-    blockS.color.a = 1;
-    blockS.color.r = 0;
-    blockS.color.g = 230;
-    blockS.color.b = 0;
+    blockS.color.set(230, 0, 0, 1);
     blockS.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
                             new BlockElement(0,-1),
@@ -19,10 +17,110 @@ function Blocks(gridSize)
                             new BlockElement(0,-1)]);
 
 
+    // grün
+    var blockSU = new Block(5,5);
+    blockSU.color.set(0, 230, 0, 1);
+    blockSU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(1,1)]);
 
-    //TODO: add the rest of the blocks
+    blockSU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(-1,0),
+                            new BlockElement(-1,-1)]);
+
+    var blockI = new Block(5,5);
+    blockI.addVariation([   new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(2,0)]);
+
+    blockI.addVariation([   new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(0,2)]);
+
+    // violett
+    var blockT = new Block(5,5);
+    blockT.addVariation([   new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(0,-1)]);
+
+    blockT.addVariation([   new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(1,0),
+                            new BlockElement(0,1)]);
+
+    blockT.addVariation([   new BlockElement(0,0),
+                            new BlockElement(1,0),
+                            new BlockElement(0,1),
+                            new BlockElement(-1,0)]);
+
+    blockT.addVariation([   new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(-1,0)]);
+
+    // orange
+    var blockL = new Block(5,5);
+    blockL.addVariation([   new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(1,-1)]);
+
+    blockL.addVariation([   new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(1,1)]);
+
+    blockL.addVariation([   new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(-1,1)]);
+
+    blockL.addVariation([   new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(-1,-1)]);
+
+    // dunkel-blau
+    var blockLU = new Block(5,5);
+    blockLU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(-1,-1)]);
+
+    blockLU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(-1,1)]);
+
+    blockLU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(-1,0),
+                            new BlockElement(1,0),
+                            new BlockElement(1,1)]);
+
+    blockLU.addVariation([  new BlockElement(0,0),
+                            new BlockElement(0,-1),
+                            new BlockElement(0,1),
+                            new BlockElement(1,-1)]);
+
+    // gelb
+    var blockQ = new Block(5,5);
+    blockQ.addVariation([   new BlockElement(0,0),
+                            new BlockElement(1,0),
+                            new BlockElement(0,1),
+                            new BlockElement(1,1)]);
 
     this.tetris.push(blockS);
+    this.tetris.push(blockSU);
+    this.tetris.push(blockI);
+    this.tetris.push(blockT);
+    this.tetris.push(blockL);
+    this.tetris.push(blockLU);
+    this.tetris.push(blockQ);
 }
 
 function Block(seedX, seedY)
@@ -39,6 +137,14 @@ function Block(seedX, seedY)
         this.r  = 50; // red   0-255
         this.g  = 50; // green 0-255
         this.b  = 50; // blue  0-255
+
+        this.set = function(r,g,b,a)
+        {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        }
     }
 
     this.variations = [];

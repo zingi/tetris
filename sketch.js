@@ -43,13 +43,12 @@ function draw()
     timeDiff    = timeEnd - timeStart;
     if (timeDiff > (speedMillis))
     {
-        timeStart = timeEnd;
         checkActualBlock();
+        timeStart = timeEnd;
     }
 
-
-    //TODO: automate the block-seed
-    if (actualBlock != null) {
+    if (actualBlock != null)
+    {
         actualBlock.draw();
     }
 }
@@ -61,38 +60,64 @@ function checkActualBlock()
         // generiere neuen Block
         actualBlock = blocks.getRandBlock();
     }
+    moveBlock('down');
+
+    //TODO: check if cannont move further: generate new block
 }
 
-function keyPressed()
+function moveBlock(move)
 {
-    if (keyCode == 32) // space pressed
+    if (actualBlock === null)
+    {
+        return;
+    }
+    else if (move == 'rotate')
     {
         if (actualBlock.checkRotationMove())
         {
             actualBlock.changeVariation();
         }
-
     }
-    else if (keyCode == LEFT_ARROW)
+    else if (move == 'left')
     {
         if (actualBlock.checkLeftMove())
         {
             actualBlock.rx--;
         }
     }
-    else if (keyCode == RIGHT_ARROW)
+    else if (move == 'right')
     {
         if (actualBlock.checkRightMove())
         {
             actualBlock.rx++;
         }
     }
-    else if (keyCode == DOWN_ARROW)
+    else if (move == 'down')
     {
         if (actualBlock.checkDownMove())
         {
             actualBlock.ry++;
         }
+    }
+}
+
+function keyPressed()
+{
+    if (keyCode == 32) // space pressed
+    {
+        moveBlock('rotate');
+    }
+    else if (keyCode == LEFT_ARROW)
+    {
+        moveBlock('left');
+    }
+    else if (keyCode == RIGHT_ARROW)
+    {
+        moveBlock('right');
+    }
+    else if (keyCode == DOWN_ARROW)
+    {
+        moveBlock('down');
     }
     else if (keyCode == UP_ARROW)
     {

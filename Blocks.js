@@ -5,7 +5,7 @@ function Blocks(gridSize)
 
     // rot
     var blockS = new Block(5,0);
-    blockS.color.set(230, 0, 0, 1);
+    blockS.color.set(227, 65, 50, 1);
     blockS.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
                             new BlockElement(0,-1),
@@ -19,7 +19,7 @@ function Blocks(gridSize)
 
     // grün
     var blockSU = new Block(5,0);
-    blockSU.color.set(0, 230, 0, 1);
+    blockSU.color.set(113, 204, 81, 1);
     blockSU.addVariation([  new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(0,-1),
@@ -31,6 +31,7 @@ function Blocks(gridSize)
                             new BlockElement(-1,-1)]);
 
     var blockI = new Block(4,0);
+    blockI.color.set(195, 215, 238, 1);
     blockI.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -43,6 +44,7 @@ function Blocks(gridSize)
 
     // violett
     var blockT = new Block(5,0);
+    blockT.color.set(191, 155, 222, 1);
     blockT.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -65,6 +67,7 @@ function Blocks(gridSize)
 
     // orange
     var blockL = new Block(5,0);
+    blockL.color.set(255, 108, 47, 1)
     blockL.addVariation([   new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -87,6 +90,7 @@ function Blocks(gridSize)
 
     // dunkel-blau
     var blockLU = new Block(5,0);
+    blockLU.color.set(0, 117, 179, 1);
     blockLU.addVariation([  new BlockElement(0,0),
                             new BlockElement(-1,0),
                             new BlockElement(1,0),
@@ -109,6 +113,7 @@ function Blocks(gridSize)
 
     // gelb
     var blockQ = new Block(4,0);
+    blockQ.color.set(249, 227, 151, 1);
     blockQ.addVariation([   new BlockElement(0,0),
                             new BlockElement(1,0),
                             new BlockElement(0,1),

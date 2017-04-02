@@ -7,6 +7,8 @@ var X_COUNT     = 10;
 var Y_COUNT     = 20;
 var G_SIZE      = 25;
 
+var MAX_STILL   = 3;    // maximum runs of tetris shape standing still
+
 var field       = new Field(X_ORIGIN, Y_ORIGIN, X_COUNT, Y_COUNT, G_SIZE);
 var blocks      = new Blocks();
 var actualBlock = null;
@@ -25,11 +27,6 @@ function setup()
     frameRate(60);
     var canvas = createCanvas(C_WIDTH, C_HEIGHT);
     canvas.parent('container');
-
-    field.getBox(3,10).color.r = 200;
-    field.getBox(3,10).color.g = 0;
-    field.getBox(3,10).color.b = 0;
-    field.getBox(3,10).isUsed  = true;
 
     timeStart = timestamp();
 }
@@ -59,6 +56,19 @@ function checkActualBlock()
     if (clearBlock)
     {
         // set Field as used
+        field.setUsed(actualBlock);
+
+        field.logField();
+
+        var linesCleared = field.checkLinesCleared();
+        if (linesCleared > 0)
+        {
+            field.logField();
+            console.log(field.array);
+        }
+
+        actualBlock = null;
+        clearBlock  = false;
     }
     if (actualBlock === null)
     {
@@ -67,7 +77,16 @@ function checkActualBlock()
     }
     moveBlock('down');
 
+
     //TODO: check if cannont move further: generate new block
+    actualBlock.checkIfStoodStill();
+
+    if (actualBlock.stoodStill == MAX_STILL)
+    {
+        clearBlock = true;
+    }
+
+    actualBlock.updateLastCoordinates();
 }
 
 function moveBlock(move)

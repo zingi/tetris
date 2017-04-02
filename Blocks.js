@@ -137,11 +137,14 @@ function Blocks(gridSize)
 
 function Block(seedX, seedY)
 {
-    this.seedX  = seedX;
-    this.seedY  = seedY;
-    this.rx     = seedX;    //reference x
-    this.ry     = seedY;    //reference y
-    this.actualVariation = 0;
+    this.seedX              = seedX;
+    this.seedY              = seedY;
+    this.rx                 = seedX;    //reference x
+    this.ry                 = seedY;    //reference y
+    this.lastRx             = 0;
+    this.lastRy             = 0;
+    this.actualVariation    = 0;
+    this.stoodStill         = 0;
 
     this.color  = new function()
     {
@@ -293,6 +296,25 @@ function Block(seedX, seedY)
             }
         }
         return true;
+    }
+
+    this.updateLastCoordinates = function()
+    {
+        this.lastRx = this.rx;
+        this.lastRy = this.ry;
+    }
+
+    this.checkIfStoodStill = function()
+    {
+        if (this.lastRy == this.ry)
+        {
+            this.stoodStill++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     this.draw = function()
